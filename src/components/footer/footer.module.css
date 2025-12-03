@@ -1,0 +1,50 @@
+footer {
+    background-color: #045cb4;
+}
+
+.footer {
+    max-width: 1140px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    padding: 100px 0;
+}
+
+.footerLeft {
+    
+    color: white;
+    display: flex;
+    flex-direction: column;
+    font-size: 20px;
+    letter-spacing: 2px;
+    gap: 8px;
+
+    h3 {
+        margin-top: 25px;
+    }
+
+    a {
+        text-decoration: none;
+        color: white;
+    }
+
+}
+
+.footerRight {
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+
+    img {
+        width: 20vw;
+    }
+}
+
+.payIcons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
