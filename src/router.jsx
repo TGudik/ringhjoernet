@@ -7,6 +7,8 @@ import Products from "./pages/Products";
 import About from "./pages/About";
 import Cart from "./pages/Cart";
 import App from "./App";
+import DealTerms from "./pages/DealTerms"
+import CookieTerms from "./pages/CookieTerms"
 
 const router = createBrowserRouter([
     {
@@ -27,6 +29,12 @@ const router = createBrowserRouter([
             },
             {
                 path: "cart", element: <Cart/>,
+            },
+            {
+                path: "handelsbetingelser", element: <DealTerms/>,
+            },
+            {
+                path: "cookie-og-privatlivspolitik", element: <CookieTerms/>,
             },
         ]
 
