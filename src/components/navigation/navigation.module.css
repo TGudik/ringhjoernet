@@ -30,3 +30,9 @@ header {
         color: #f5f5f5;
     }
 }
+
+.cartNquantity {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
