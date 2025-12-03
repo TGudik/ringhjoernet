@@ -1,0 +1,28 @@
+.header {
+    width: 100vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1140px;
+    margin: 0 auto;
+    background-color: #045cb4;
+
+    img {
+        height: 100px;
+        margin: 25px;
+    }
+
+}
+
+.nav{
+    width: 65%;
+    display: flex;
+    justify-content: space-evenly;
+
+    a{
+        font-size: 20px;
+        font-weight: 700;
+        text-decoration: none;
+        color: #f5f5f5;
+    }
+}
