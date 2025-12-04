@@ -21,7 +21,7 @@ export default function Footer() {
           <p>CVR: 12345678</p>
         </div>
         <div className={styles.footerRight}>
-          <img src={logo} alt="Ringhjørnet" />
+          <img src={logo} className={styles.footerLogo} alt="Ringhjørnet" />
           <div className={styles.payIcons}>
             <img src={mobilepay} alt="mobilepay" />
             <FontAwesomeIcon icon={faCcMastercard} color="#fff" fontSize={50} />

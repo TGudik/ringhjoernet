@@ -1,9 +1,12 @@
-
+import PageHero from "../components/pageHero/PageHero";
+import image from "/images/genrebilleder/front-hero.jpg"
 
 export default function Home() {
 
     return (
-        <h1>Home page</h1>
+        <section>
+            <PageHero img={image} heroTitle={"RINGHJØRNET"} heroText={"Bokseudstyr og træningsudstyr"}/>
+        </section>
     )
 
 }

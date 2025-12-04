@@ -37,8 +37,9 @@ footer {
     align-items: center;
     justify-content: space-around;
 
-    img {
-        width: 20vw;
+    .footerLogo {
+        width: 25vw;
+        height: auto;
     }
 }
 
@@ -47,4 +48,8 @@ footer {
     justify-content: space-between;
     align-items: center;
     gap: 20px;
+    img {
+        width: 20vw;
+    }
+    
 }
