@@ -21,7 +21,7 @@ header {
     width: 65%;
     display: flex;
     justify-content: space-evenly;
-
+    position: relative;
     a{
         font-size: 20px;
         font-weight: 700;
@@ -34,4 +34,30 @@ header {
     display: flex;
     align-items: center;
     gap: 5px;
+}
+
+.categoryDropdown {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 30px;
+    right: 270px;
+    z-index: 5;
+    background-color: #f4f4f4;
+    
+}
+
+.categoryDropdown.show {
+    display: flex;
+}
+
+.categoryDropdown > a {
+    color: black;
+    padding: 12px 40px;
+    border-bottom: 1px solid black;
+}
+.categoryDropdown > a:hover {
+    color: white;
+    background-color: #045cb4;
+    border-bottom: 1px solid white;
 }

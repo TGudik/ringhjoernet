@@ -9,6 +9,7 @@ import Cart from "./pages/cart/Cart";
 import App from "./App";
 import DealTerms from "./pages/DealTerms";
 import CookieTerms from "./pages/CookieTerms";
+import Category from "./pages/products/Category";
 
 const router = createBrowserRouter([
   {
@@ -42,6 +43,10 @@ const router = createBrowserRouter([
       {
         path: "cookie-og-privatlivspolitik",
         element: <CookieTerms />,
+      },
+      {
+        path: "products/:category",
+        element: <Category />,
       },
     ],
   },

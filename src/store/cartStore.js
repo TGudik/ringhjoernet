@@ -1,6 +1,9 @@
 import { create } from "zustand";
+import { persist } from "zustand/middleware";
 
-const useCartStore = create((set) => ({
+const useCartStore = create(
+  persist(
+  (set) => ({
   cart: [],
 
   addToCart: (product) =>
@@ -23,6 +26,7 @@ const useCartStore = create((set) => ({
       return {
         cart: [...state.cart, { ...product, quantity: 1 }],
       };
+
     }),
 
   removeFromCart: (id) =>
@@ -50,6 +54,12 @@ const useCartStore = create((set) => ({
   getTotalQuantity: (state) => state.cart.reduce((sum, item) => sum + item.quantity, 0),
 
   clearCart: () => set({ cart: [] }),
-}));
+}),
+{
+  name: "cart-storage", 
+}
+)
+);
+
 
 export default useCartStore;
