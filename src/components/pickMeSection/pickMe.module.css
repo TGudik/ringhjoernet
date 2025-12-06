@@ -1,0 +1,23 @@
+.pickMe {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 70px 0;
+}
+
+.pickMeHeading {
+    font-size: 50px;
+    color: #045cb4;
+    padding: 0px 0;
+}
+
+.pickMeList {
+
+    padding: 20px 30px;
+
+    li {
+        list-style-type:disc;
+        font-size: 26px;
+        padding: 10px 0;
+    }
+
+}

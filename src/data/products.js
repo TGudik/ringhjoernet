@@ -40,7 +40,7 @@ export const products = [
     name: "Bokser Startpakken",
     price: 1499,
     image: "/images/hele-pakken.jpg",
-    category: "protection",
+    category: "bundles",
     description:
       "den ultimative bokser begynderpakke til dig, der vil i gang med boksning på den rigtige måde. Kom godt i gang med vores bokser begynderpakke! Indeholder handsker, hjelm, håndbind og sjippetov – alt du skal bruge som ny bokser.Kom godt i gang med vores bokse begynderpakke. Handsker, hjelm, håndbind og sjippetov – alt du skal bruge som ny bokser.",
   },

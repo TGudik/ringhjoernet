@@ -1,0 +1,35 @@
+.infoSection {
+    padding: 100px 0;
+    background-color: rgb(10, 10, 10);
+    color: white;
+}
+
+.infoSectionContent {
+    max-width: 1140px;
+    margin: 0 auto;
+}
+
+.sectionHeading {
+    font-size: 40px;
+    padding: 10px 0;
+}
+
+.infoText {
+    font-size: 22px;
+    margin-bottom: 30px;
+}
+
+.infoGrid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.gridHeading {
+    font-size: 26px;
+}
+
+.gridText {
+    font-size: 20px;
+    margin-top: 10px;
+}

@@ -33,6 +33,7 @@ export default function Navigation() {
               onMouseEnter={() => setShowCategories(true)}
               onMouseLeave={() => setShowCategories(false)}
             >
+              <Link to="/products/bundles">Startpakker</Link>
               <Link to="/products/gloves">Handsker</Link>
               <Link to="/products/shoes">Boksesko</Link>
               <Link to="/products/headgear">Boksehjelme</Link>

@@ -1,11 +1,15 @@
 import { useParams } from "react-router-dom";
 import { products } from "../../data/products";
 import styles from "./products.module.css"
+import useCartStore from "../../store/cartStore";
 
 export default function Category() {
+  const addToCart = useCartStore((state) => state.addToCart)
   const category = useParams();
 
-  const filteredProducts = products.filter((p) => p.category === category);
+  const filteredProducts = products.filter((p) => p.category === category.category);
+
+  console.log(filteredProducts)
 
   return (
     <div className={styles.productCards}>
@@ -25,6 +29,11 @@ export default function Category() {
           </div>
         );
       })}
+
+      {filteredProducts.length === 0 && (
+        <p>Ingen produkter i kategorien</p>
+      )}
+
     </div>
   );
 }
