@@ -24,8 +24,11 @@ export default function Packs() {
           <div className={styles.packsGrid}>
 
             <div className={styles.gridItem}>
+
               <img src={img1} alt="starterpakken" />
+
               <div className={styles.gridPackInfo}>
+
                 <h4 className={styles.gridPackHeading}>
                   Bokser startpakken - Alt til en ny bokser
                 </h4>
@@ -34,7 +37,9 @@ export default function Packs() {
                   håndbind, 1 tandbeskytter, 1 par Everlast boksestøvler, 1
                   Venum Boksehjelm og 1 par Venum boksehandsker
                 </p>
+
               </div>
+              
             </div>
 
             <div className={styles.gridItem}>
