@@ -7,9 +7,26 @@
 
 .cardImg {
     object-fit: contain;
-    transition: 0.4s;
+    height: auto;
+    min-height: 400px;
 }
 
-.cardImg:hover {
-    scale: 1.15;
+.cardContainer {
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.cardContainer:hover {
+    scale: 1.1;
+}
+
+.cardsHeading {
+    text-align: center;
+    color: #045cb4;
+    font-size: 30px;
+    font-weight: 800;
+}
+
+.cardsText {
+    color: black;
 }

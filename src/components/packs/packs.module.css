@@ -1,0 +1,85 @@
+/* ---------- Container ---------- */
+.packsContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 40px 20px;
+  background-color: rgb(10, 10, 10);
+}
+
+.packsContent {
+  max-width: 1200px;
+  width: 100%;
+}
+
+.packsHeading {
+  font-size: 28px;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.packsText {
+  font-size: 16px;
+  line-height: 1.6;
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.packsHeading, .packsText {
+    color: white;
+}
+
+
+/* ---------- Grid Layout ---------- */
+.packsGrid {
+  display: grid;
+  gap: 30px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  width: 100%;
+  box-sizing: border-box;
+}
+
+
+/* ---------- Grid Items ---------- */
+.gridItem {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 3px 12px rgba(255, 255, 255,0.5);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  overflow: hidden;
+  transition: 0.1s;
+}
+
+.gridItem:hover {
+    scale: 1.02;
+}
+
+
+/* ---------- Billeder ---------- */
+.gridItem img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+
+/* ---------- Tekst under billeder ---------- */
+.gridPackInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.gridPackHeading {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.gridPackText {
+  font-size: 15px;
+}

@@ -22,32 +22,10 @@ export default function Packs() {
             produkt – vi har gjort arbejdet for dig.
           </p>
           <div className={styles.packsGrid}>
-
-            <div className={styles.gridItem}>
-
-              <img src={img1} alt="starterpakken" />
-
-              <div className={styles.gridPackInfo}>
-
-                <h4 className={styles.gridPackHeading}>
-                  Bokser startpakken - Alt til en ny bokser
-                </h4>
-                <p className={styles.gridPackText}>
-                  Kom godt i gang med Bokse Startpakken Pakken indeholder: 2 sæt
-                  håndbind, 1 tandbeskytter, 1 par Everlast boksestøvler, 1
-                  Venum Boksehjelm og 1 par Venum boksehandsker
-                </p>
-
-              </div>
-              
-            </div>
-
             <div className={styles.gridItem}>
               <img src={img1} alt="starterpakken" />
               <div className={styles.gridPackInfo}>
-                <h4 className={styles.gridPackHeading}>
-                  Bokser startpakken - Alt til en ny bokser
-                </h4>
+                <h4 className={styles.gridPackHeading}>Bokser startpakken…</h4>
                 <p className={styles.gridPackText}>
                   Kom godt i gang med Bokse Startpakken Pakken indeholder: 2 sæt
                   håndbind, 1 tandbeskytter, 1 par Everlast boksestøvler, 1
@@ -55,13 +33,10 @@ export default function Packs() {
                 </p>
               </div>
             </div>
-
             <div className={styles.gridItem}>
               <img src={img1} alt="starterpakken" />
               <div className={styles.gridPackInfo}>
-                <h4 className={styles.gridPackHeading}>
-                  Bokser startpakken - Alt til en ny bokser
-                </h4>
+                <h4 className={styles.gridPackHeading}>Bokser startpakken…</h4>
                 <p className={styles.gridPackText}>
                   Kom godt i gang med Bokse Startpakken Pakken indeholder: 2 sæt
                   håndbind, 1 tandbeskytter, 1 par Everlast boksestøvler, 1
@@ -69,9 +44,22 @@ export default function Packs() {
                 </p>
               </div>
             </div>
+            <div className={styles.gridItem}>
+              <img src={img1} alt="starterpakken" />
+              <div className={styles.gridPackInfo}>
+                <h4 className={styles.gridPackHeading}>Bokser startpakken…</h4>
+                <p className={styles.gridPackText}>
+                  Kom godt i gang med Bokse Startpakken Pakken indeholder: 2 sæt
+                  håndbind, 1 tandbeskytter, 1 par Everlast boksestøvler, 1
+                  Venum Boksehjelm og 1 par Venum boksehandsker
+                </p>
+              </div>
+            </div>
+
+            
           </div>
         </div>
-        </div> 
+      </div>
     );
 
 }

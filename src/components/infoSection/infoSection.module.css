@@ -25,11 +25,23 @@
     gap: 20px;
 }
 
+.gridImg {
+    object-fit: contain;
+    height: auto;
+    border-radius: 10px;
+    background-color: white;
+    min-height: 275px;
+}
+
 .gridHeading {
     font-size: 26px;
+    text-align: center;
+    
 }
 
 .gridText {
     font-size: 20px;
     margin-top: 10px;
+    padding: 5px;
+    text-align: center;
 }
