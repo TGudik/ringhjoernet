@@ -10,6 +10,7 @@ import App from "./App";
 import DealTerms from "./pages/DealTerms";
 import CookieTerms from "./pages/CookieTerms";
 import Category from "./pages/products/Category";
+import CreateProduct from "./pages/admin/createProduct";
 
 const router = createBrowserRouter([
   {
@@ -47,6 +48,10 @@ const router = createBrowserRouter([
       {
         path: "products/:category",
         element: <Category />,
+      },
+      {
+        path: "admin/create-product",
+        element: <CreateProduct />,
       },
     ],
   },
