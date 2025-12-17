@@ -1,9 +1,12 @@
 import { useState } from "react";
+import styles from "./createProduct.module.css"
 
 export default function CreateProduct() {
     const [title, setTitle] = useState("")
     const [price, setPrice] = useState("")
     const [category, setCategory] = useState("")
+    const [description, setDescription] = useState("")
+    const [brand, setBrand] = useState("")
     const [status, setStatus] = useState("")
 
     
@@ -21,7 +24,9 @@ export default function CreateProduct() {
             body: JSON.stringify({
                 title,
                 price: Number(price),
-                category
+                category,
+                description,
+                brand,
             })
         })
 
@@ -34,14 +39,17 @@ export default function CreateProduct() {
         setTitle("")
         setPrice("")
         setCategory("")
+        setDescription("")
+        setBrand("")
         setStatus("Produkt oprettet")
     }
 
     return (
-    <div style={{ maxWidth: 500 }}>
+    <div className={styles.formContainer
+    }>
       <h1>Opret produkt</h1>
 
-      <form onSubmit={handleSubmit}>
+      <form className={styles.createProductForm} onSubmit={handleSubmit}>
         <div>
           <label>Titel</label>
           <input
@@ -58,6 +66,13 @@ export default function CreateProduct() {
             value={price}
             onChange={(e) => setPrice(e.target.value)}
             required
+          />
+        </div>
+        <div>
+          <label>Beskrivelse</label>
+          <textarea
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
           />
         </div>
 

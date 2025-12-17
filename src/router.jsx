@@ -10,7 +10,7 @@ import App from "./App";
 import DealTerms from "./pages/DealTerms";
 import CookieTerms from "./pages/CookieTerms";
 import Category from "./pages/products/Category";
-import CreateProduct from "./pages/admin/createProduct";
+import CreateProduct from "./pages/admin/CreateProduct";
 
 const router = createBrowserRouter([
   {
