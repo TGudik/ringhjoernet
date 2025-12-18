@@ -1,4 +1,4 @@
-import styles from "./ProductCard.module.css";
+import styles from "./productCard.module.css";
 import useCartStore from "../../store/cartStore";
 
 export default function ProductCard({ product }) {

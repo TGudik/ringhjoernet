@@ -10,6 +10,11 @@ import App from "./App";
 import DealTerms from "./pages/DealTerms";
 import CookieTerms from "./pages/CookieTerms";
 import Category from "./pages/products/Category";
+
+
+/* Admin imports */
+import AdminLogin from "./pages/admin/adminLogin/AdminLogin";
+import AdminRoute from "./components/adminRoute/AdminRoute";
 import CreateProduct from "./pages/admin/CreateProduct";
 
 const router = createBrowserRouter([
@@ -50,8 +55,15 @@ const router = createBrowserRouter([
         element: <Category />,
       },
       {
+        path: "admin/login",
+        element: <AdminLogin />,
+      },
+      {
         path: "admin/create-product",
-        element: <CreateProduct />,
+        element: 
+        <AdminRoute>
+          <CreateProduct />
+        </AdminRoute>
       },
     ],
   },
