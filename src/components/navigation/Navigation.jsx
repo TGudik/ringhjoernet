@@ -8,6 +8,7 @@ import { useState } from "react"
 
 export default function Navigation() {
 
+    const isAdmin = localStorage.getItem("isAdmin")
     const totalQuantity = useCartStore((state) => state.getTotalQuantity(state))
     const [showCategories, setShowCategories] = useState(false)
 
@@ -44,6 +45,19 @@ export default function Navigation() {
               <FontAwesomeIcon icon={faBasketShopping} fontSize={30} />
               {totalQuantity}
             </Link>
+            {isAdmin && (
+              <Link to="/admin/create-product">
+              Create Product
+              </Link>
+            )}
+            {isAdmin && (
+              <button onClick={() => {
+                localStorage.removeItem("isAdmin")
+                window.location.reload()
+              }}>
+                Log ud
+              </button>
+            )}
           </nav>
         </div>
       </header>

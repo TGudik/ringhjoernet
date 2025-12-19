@@ -18,16 +18,26 @@ header {
 }
 
 .nav{
-    width: 65%;
     display: flex;
     justify-content: space-evenly;
+    align-items: center;
     position: relative;
+    gap: 30px;
     a{
         font-size: 20px;
         font-weight: 700;
         text-decoration: none;
         color: #f5f5f5;
     }
+}
+
+button {
+    font-family: "Nunito";
+    font-size: 20px;
+    font-weight: 700;
+    padding: 0;
+    cursor: pointer;
+    margin: 0;
 }
 
 .cartNquantity {

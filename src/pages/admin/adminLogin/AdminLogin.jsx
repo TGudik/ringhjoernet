@@ -17,6 +17,8 @@ export default function AdminLogin() {
         } else {
             setError("Forkert Kode")
         }
+
+        window.location.reload()
     }
 
 
