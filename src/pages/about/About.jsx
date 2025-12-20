@@ -1,9 +1,46 @@
 import PageHero from "../../components/pageHero/PageHero"
 import styles from "./about.module.css"
 import heroImg from "/images/genrebilleder/aboutHero.jpg"
+import { useState } from "react";
 
 export default function About() {
-  
+   const [status, setStatus] = useState("");
+
+   const handleSubmit = async (e) => {
+     e.preventDefault();
+
+     const formData = new FormData(e.target);
+
+     const data = {
+       name: formData.get("name"),
+       email: formData.get("email"),
+       subject: formData.get("subject"),
+       message: formData.get("message"),
+     };
+
+     try {
+       const res = await fetch(
+         "https://fcxwyecesdubgivjosip.supabase.co/functions/v1/contact",
+         {
+           method: "POST",
+           headers: {
+             "Content-Type": "application/json",
+             Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
+           },
+           body: JSON.stringify(data),
+         }
+       );
+
+       if (!res.ok) throw new Error();
+
+       setStatus("Tak for din besked – vi vender tilbage hurtigst muligt!");
+       e.target.reset();
+     } catch (err) {
+       setStatus("Noget gik galt. Prøv igen senere.");
+     }
+   };
+
+
   return (
     <div>
       <PageHero img={heroImg} heroTitle={"Kontakt Ringhjørnet"} heroText={"Webshoppen til boksere"}/>
@@ -45,7 +82,7 @@ export default function About() {
             Udfyld formularen herunder, så vender vi hurtigt tilbage.
           </p>
   
-          <form className={styles.form}>
+          <form className={styles.form} onSubmit={handleSubmit}>
             <label>
               Dit navn
               <input type="text" name="name" required />
@@ -69,6 +106,7 @@ export default function About() {
             <button type="submit" className={styles.submitBtn}>
               Send besked
             </button>
+            {status && <p className={styles.status}>{status}</p>}
           </form>
         </div>
       </div>
