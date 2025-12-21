@@ -46,12 +46,14 @@ button {
     gap: 5px;
 }
 
+.productsLink {position: relative;}
+
 .categoryDropdown {
     display: none;
     flex-direction: column;
     position: absolute;
     top: 30px;
-    right: 270px;
+    left: -20px;
     z-index: 5;
     background-color: #f4f4f4;
     

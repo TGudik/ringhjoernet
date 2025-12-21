@@ -24,26 +24,30 @@ export default function Navigation() {
               to="/products"
               onMouseEnter={() => setShowCategories(true)}
               onMouseLeave={() => setShowCategories(false)}
+              className={styles.productsLink}
             >
               Udstyr
-            </Link>
             <div
               className={`${styles.categoryDropdown} ${
                 showCategories ? styles.show : ""
               }`}
               onMouseEnter={() => setShowCategories(true)}
               onMouseLeave={() => setShowCategories(false)}
-            >
+              >
               <Link to="/products/bundles">Startpakker</Link>
               <Link to="/products/gloves">Handsker</Link>
               <Link to="/products/shoes">Boksesko</Link>
               <Link to="/products/headgear">Boksehjelme</Link>
               <Link to="/products/protection">Beskyttelse</Link>
             </div>
+              </Link>
             <Link to="/about">Kontakt / Om</Link>
             <Link to="/cart" className={styles.cartNquantity}>
               <FontAwesomeIcon icon={faBasketShopping} fontSize={30} />
               {totalQuantity}
+            </Link>
+            <Link to="/admin/login">
+            login
             </Link>
             {isAdmin && (
               <Link to="/admin/create-product">
