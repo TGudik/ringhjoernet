@@ -15,7 +15,7 @@ import Category from "./pages/products/Category";
 /* Admin imports */
 import AdminLogin from "./pages/admin/adminLogin/AdminLogin";
 import AdminRoute from "./components/adminRoute/AdminRoute";
-import CreateProduct from "./pages/admin/CreateProduct";
+import AdminProducts from "./pages/admin/adminProducts/AdminProducts";
 
 const router = createBrowserRouter([
   {
@@ -59,12 +59,12 @@ const router = createBrowserRouter([
         element: <AdminLogin />,
       },
       {
-        path: "admin/create-product",
+        path: "admin/products", 
         element: 
         <AdminRoute>
-          <CreateProduct />
+          <AdminProducts/>
         </AdminRoute>
-      },
+      }
     ],
   },
 ]);

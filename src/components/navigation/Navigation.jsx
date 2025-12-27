@@ -46,14 +46,6 @@ export default function Navigation() {
               <FontAwesomeIcon icon={faBasketShopping} fontSize={30} />
               {totalQuantity}
             </Link>
-            <Link to="/admin/login">
-            login
-            </Link>
-            {isAdmin && (
-              <Link to="/admin/create-product">
-              Create Product
-              </Link>
-            )}
             {isAdmin && (
               <button onClick={() => {
                 localStorage.removeItem("isAdmin")

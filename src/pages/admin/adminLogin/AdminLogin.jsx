@@ -13,7 +13,7 @@ export default function AdminLogin() {
 
         if (password === import.meta.env.VITE_ADMIN_PASSWORD) {
             localStorage.setItem("isAdmin", "true")
-            navigate("/admin/create-product")
+            navigate("/")
         } else {
             setError("Forkert Kode")
         }
