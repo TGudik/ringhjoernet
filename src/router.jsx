@@ -13,9 +13,10 @@ import Category from "./pages/products/Category";
 
 
 /* Admin imports */
-import AdminLogin from "./pages/admin/adminLogin/AdminLogin";
+import SignUp from "./pages/signUp/SignUp";
 import AdminRoute from "./components/adminRoute/AdminRoute";
 import AdminProducts from "./pages/admin/adminProducts/AdminProducts";
+import ProductPage from "./pages/productPage/ProductPage";
 
 const router = createBrowserRouter([
   {
@@ -33,6 +34,10 @@ const router = createBrowserRouter([
       {
         path: "products",
         element: <Products />,
+      },
+      {
+        path: "product/:productId",
+        element: <ProductPage />,
       },
       {
         path: "about",
@@ -55,8 +60,8 @@ const router = createBrowserRouter([
         element: <Category />,
       },
       {
-        path: "admin/login",
-        element: <AdminLogin />,
+        path: "sign-up",
+        element: <SignUp />,
       },
       {
         path: "admin/products", 

@@ -5,6 +5,7 @@ export default function Cart() {
   const cart = useCartStore((state) => state.cart);
   const addToCart = useCartStore((state) => state.addToCart)
   const removeFromCart = useCartStore((state) => state.removeFromCart);
+  const deleteFromCart = useCartStore((state) => state.deleteFromCart);
   const total = useCartStore((state) => state.getTotal(state));
 
 
@@ -23,7 +24,7 @@ export default function Cart() {
             <button onClick={() => removeFromCart(product.id)}>-</button>
           </div>
 
-          <button onClick={() => removeFromCart(product.id)}>
+          <button onClick={() => deleteFromCart(product.id)}>
             Fjern fra kurv
           </button>
         </div>

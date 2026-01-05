@@ -49,6 +49,12 @@ const useCartStore = create(
       };
     }),
 
+  deleteFromCart: (id) => set((state) => {
+    return {
+      cart: state.cart.filter((item) => item.id !== id)
+    }
+  }),
+
   getTotal: (state) => state.cart.reduce((sum, item) => sum + item.price * item.quantity, 0),
 
   getTotalQuantity: (state) => state.cart.reduce((sum, item) => sum + item.quantity, 0),
