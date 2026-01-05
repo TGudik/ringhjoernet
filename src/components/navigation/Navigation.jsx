@@ -3,12 +3,17 @@ import { Link } from "react-router-dom"
 import styles from "./navigation.module.css"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faBasketShopping } from "@fortawesome/free-solid-svg-icons"
+import { faSignOutAlt } from "@fortawesome/free-solid-svg-icons"
+import { faUser } from "@fortawesome/free-solid-svg-icons";
 import useCartStore from "../../store/cartStore"
 import { useState } from "react"
+import { useAuth } from "../../context/AuthContext"
+import { supabase } from "../../lib/supabaseClient"
+
 
 export default function Navigation() {
 
-    const isAdmin = localStorage.getItem("isAdmin")
+    const { user } = useAuth()
     const totalQuantity = useCartStore((state) => state.getTotalQuantity(state))
     const [showCategories, setShowCategories] = useState(false)
 
@@ -46,14 +51,21 @@ export default function Navigation() {
               <FontAwesomeIcon icon={faBasketShopping} fontSize={30} />
               {totalQuantity}
             </Link>
-            {isAdmin && (
-              <button onClick={() => {
-                localStorage.removeItem("isAdmin")
-                window.location.reload()
-              }}>
-                Log ud
-              </button>
-            )}
+            {!user && 
+              <Link to="/sign-up">
+                <FontAwesomeIcon icon={faUser} fontSize={30}/>
+              </Link>
+            }
+
+            {user && 
+            <FontAwesomeIcon 
+            icon={faSignOutAlt} 
+            color="white" 
+            fontSize={30} 
+            className={styles.signOutBtn} 
+            onClick={() => supabase.auth.signOut()}></FontAwesomeIcon>
+            }
+            
           </nav>
         </div>
       </header>
