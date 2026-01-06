@@ -10,20 +10,24 @@ export default function AdminProducts() {
     const [description, setDescription] = useState("")
     const [price, setPrice] = useState("")
 
+    // funktion til at sende billeder til supabase
     async function uploadImages(productId, files) {
       const uploadedUrls = []
 
+      // laver et unikt navn til hver fil og laver et variabel der passer med fisltien til billedet
       for (const file of files) {
         const fileExt = file.name.split(".").pop()
         const fileName = `${crypto.randomUUID()}.${fileExt}`
         const filePath = `${productId}/${fileName}`
 
+        // uploader filen til supabase bucket til filstien fra før 
         const { error } = await supabase.storage
         .from("product-images")
         .upload(filePath, file)
 
         if (error) throw error
 
+        // henter url til billede fra supabase
         const { data } = supabase.storage
           .from("product-images")
           .getPublicUrl(filePath);
@@ -41,7 +45,7 @@ export default function AdminProducts() {
       e.preventDefault();
 
       try {
-     
+        // uploader billede (slug genereres med sql-funktion i supabase dashboard)
         const { data: product, error: insertError } = await supabase
           .from("products")
           .insert({
@@ -56,11 +60,13 @@ export default function AdminProducts() {
 
         if (insertError) throw insertError;
 
+        // når product er oprettet bruges produkt id til at uploade billeder i rigtig mappe i bucket
         let imageUrls = [];
         if (images.length > 0) {
           imageUrls = await uploadImages(product.id, images);
         }
         
+        // når billederne er i supabasebucket opdateres images-arrayet i supabase-tabellen til at indeholde image-urls
         if (imageUrls.length > 0) {
           const { error: updateError } = await supabase
             .from("products")
@@ -74,7 +80,7 @@ export default function AdminProducts() {
 
         alert("Produkt oprettet");
 
-        
+        // clearer felter så nyt produkt kan oprettes
         setTitle("");
         setCategory("");
         setBrand("");
