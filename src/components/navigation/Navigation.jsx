@@ -7,13 +7,12 @@ import { faSignOutAlt } from "@fortawesome/free-solid-svg-icons"
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import useCartStore from "../../store/cartStore"
 import { useState } from "react"
-import { useAuth } from "../../context/AuthContext"
 import { supabase } from "../../lib/supabaseClient"
+import useAuthStore from "../../store/authStore"
 
 
 export default function Navigation() {
-
-    const { user } = useAuth()
+    const user = useAuthStore
     const totalQuantity = useCartStore((state) => state.getTotalQuantity(state))
     const [showCategories, setShowCategories] = useState(false)
 
@@ -61,9 +60,10 @@ export default function Navigation() {
             <FontAwesomeIcon 
             icon={faSignOutAlt} 
             color="white" 
-            fontSize={30} 
+            fontSize={28} 
             className={styles.signOutBtn} 
-            onClick={() => supabase.auth.signOut()}></FontAwesomeIcon>
+            onClick={() => supabase.auth.signOut()}>
+            </FontAwesomeIcon>
             }
             
           </nav>

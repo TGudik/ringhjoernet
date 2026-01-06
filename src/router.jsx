@@ -13,10 +13,11 @@ import Category from "./pages/products/Category";
 
 
 /* Admin imports */
-import SignUp from "./pages/signUp/SignUp";
+import SignUp from "./pages/signUp/SignUp"
 import AdminRoute from "./components/adminRoute/AdminRoute";
 import AdminProducts from "./pages/admin/adminProducts/AdminProducts";
 import ProductPage from "./pages/productPage/ProductPage";
+
 
 const router = createBrowserRouter([
   {

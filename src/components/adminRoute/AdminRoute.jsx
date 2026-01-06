@@ -1,10 +1,12 @@
-import { Navigate } from "react-router-dom";
+
 
 export default function AdminRoute({ children }) {
-  const isAdmin = localStorage.getItem("isAdmin") === "true";
 
-  if (!isAdmin) {
-    return <Navigate to="/admin/login" replace />;
+  const { user, loading } = useAuthStore();
+
+  if (loading) return <Spinner />;
+  if (!user || user.role !== "admin") {
+    return <Navigate to="/" />;
   }
 
   return children;
