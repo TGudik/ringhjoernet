@@ -10,19 +10,6 @@ export default function AdminProducts() {
     const [description, setDescription] = useState("")
     const [price, setPrice] = useState("")
 
-    function slugify(text) {
-      return text
-        .toString()
-        .toLowerCase()
-        .trim()
-        .replace(/æ/g, "ae")
-        .replace(/ø/g, "oe")
-        .replace(/å/g, "aa")
-        .replace(/[^a-z0-9\s-]/g, "")
-        .replace(/\s+/g, "-")
-        .replace(/-+/g, "-");
-    }
-
     async function uploadImages(productId, files) {
       const uploadedUrls = []
 
@@ -38,14 +25,16 @@ export default function AdminProducts() {
         if (error) throw error
 
         const { data } = supabase.storage
-        .from("product-images")
-        .getPublicUrl(filePath)
+          .from("product-images")
+          .getPublicUrl(filePath);
 
         uploadedUrls.push(data.publicUrl)
       }
 
       return uploadedUrls
     }
+
+    
 
 
     async function handleSubmit(e) {
@@ -67,15 +56,6 @@ export default function AdminProducts() {
 
         if (insertError) throw insertError;
 
-        const slug = `${slugify(title)}-${product.id}`;
-
-        const { error: slugError } = await supabase
-          .from("products")
-          .update({ slug })
-          .eq("id", product.id);
-
-        if (slugError) throw slugError;
-
         let imageUrls = [];
         if (images.length > 0) {
           imageUrls = await uploadImages(product.id, images);
@@ -87,7 +67,9 @@ export default function AdminProducts() {
             .update({ images: imageUrls })
             .eq("id", product.id);
 
-          if (updateError) throw updateError;
+          if (updateError) {
+            console.error("update images error", updateError)
+            throw updateError;}
         }
 
         alert("Produkt oprettet");
@@ -144,7 +126,6 @@ export default function AdminProducts() {
             placeholder="Brand navn"
             value={brand}
             onChange={(e) => setBrand(e.target.value)}
-            required
           />
         </label>
 
@@ -174,7 +155,7 @@ export default function AdminProducts() {
           <input type="file"
           accept="image/*" 
           multiple
-          onChange={(e) => setImages(e.target.files)}/>
+          onChange={(e) => setImages(Array.from(e.target.files))}/>
         </label>
 
         <button type="submit">Opret produkt</button>
