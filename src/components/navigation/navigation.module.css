@@ -73,3 +73,7 @@ button {
     background-color: #045cb4;
     border-bottom: 1px solid white;
 }
+
+.Link {
+    cursor: pointer;
+}

@@ -5,6 +5,7 @@ import { supabase } from "../../../lib/supabaseClient"
 export default function AdminProducts() {
     const [title, setTitle] = useState("")
     const [category, setCategory] = useState("")
+    const [images, setImages] = useState([])
     const [brand, setBrand] = useState("")
     const [description, setDescription] = useState("")
     const [price, setPrice] = useState("")
@@ -22,38 +23,88 @@ export default function AdminProducts() {
         .replace(/-+/g, "-");
     }
 
+    async function uploadImages(productId, files) {
+      const uploadedUrls = []
+
+      for (const file of files) {
+        const fileExt = file.name.split(".").pop()
+        const fileName = `${crypto.randomUUID()}.${fileExt}`
+        const filePath = `${productId}/${fileName}`
+
+        const { error } = await supabase.storage
+        .from("product-images")
+        .upload(filePath, file)
+
+        if (error) throw error
+
+        const { data } = supabase.storage
+        .from("product-images")
+        .getPublicUrl(filePath)
+
+        uploadedUrls.push(data.publicUrl)
+      }
+
+      return uploadedUrls
+    }
+
 
     async function handleSubmit(e) {
-        e.preventDefault()
+      e.preventDefault();
 
-        const slug = slugify(title)
+      try {
+     
+        const { data: product, error: insertError } = await supabase
+          .from("products")
+          .insert({
+            title,
+            category,
+            brand,
+            description,
+            price: Number(price),
+          })
+          .select()
+          .single();
 
-        const { error } = await supabase
-        .from("products")
-        .insert([
-            {
-                title,
-                slug,
-                category,
-                brand,
-                description,
-                price,
-            }
-        ])
+        if (insertError) throw insertError;
 
-        if (error) {
-            alert("Noget gik galt")
-            console.error(error)
-        } else {
-            alert("Produkt oprettet")
-            setTitle("")
-            setCategory("")
-            setBrand("")
-            setDescription("")
-            setPrice("")
+        const slug = `${slugify(title)}-${product.id}`;
+
+        const { error: slugError } = await supabase
+          .from("products")
+          .update({ slug })
+          .eq("id", product.id);
+
+        if (slugError) throw slugError;
+
+        let imageUrls = [];
+        if (images.length > 0) {
+          imageUrls = await uploadImages(product.id, images);
+        }
+        
+        if (imageUrls.length > 0) {
+          const { error: updateError } = await supabase
+            .from("products")
+            .update({ images: imageUrls })
+            .eq("id", product.id);
+
+          if (updateError) throw updateError;
         }
 
+        alert("Produkt oprettet");
+
+        
+        setTitle("");
+        setCategory("");
+        setBrand("");
+        setDescription("");
+        setPrice("");
+        setImages([]);
+      } catch (error) {
+        console.error(error);
+        alert("Noget gik galt ved oprettelse af produkt");
+      }
     }
+
 
     return (
       <form onSubmit={handleSubmit} className={styles.form}>
@@ -117,6 +168,13 @@ export default function AdminProducts() {
             onChange={(e) => setPrice(e.target.value)}
             required
           />
+        </label>
+        <label>
+          Billede upload
+          <input type="file"
+          accept="image/*" 
+          multiple
+          onChange={(e) => setImages(e.target.files)}/>
         </label>
 
         <button type="submit">Opret produkt</button>

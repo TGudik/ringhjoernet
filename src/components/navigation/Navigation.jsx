@@ -12,7 +12,7 @@ import useAuthStore from "../../store/authStore"
 
 
 export default function Navigation() {
-    const user = useAuthStore
+    const user = useAuthStore((state) => state.user)
     const totalQuantity = useCartStore((state) => state.getTotalQuantity(state))
     const [showCategories, setShowCategories] = useState(false)
 
