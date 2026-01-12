@@ -17,6 +17,7 @@ import SignUp from "./pages/signUp/SignUp"
 import AdminRoute from "./components/adminRoute/AdminRoute";
 import AdminProducts from "./pages/admin/adminProducts/AdminProducts";
 import ProductPage from "./pages/productPage/ProductPage";
+import Checkout from "./pages/checkout/Checkout";
 
 
 const router = createBrowserRouter([
@@ -47,6 +48,10 @@ const router = createBrowserRouter([
       {
         path: "cart",
         element: <Cart />,
+      },
+      {
+        path: "checkout",
+        element: <Checkout />,
       },
       {
         path: "handelsbetingelser",

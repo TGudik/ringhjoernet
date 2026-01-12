@@ -1,5 +1,7 @@
 import useCartStore from "../../store/cartStore";
 import styles from "./cart.module.css"
+import { Link } from "react-router-dom";
+import CheckoutBtn from "../../components/checkoutBtn/CheckoutBtn";
 
 export default function Cart() {
   const cart = useCartStore((state) => state.cart);
@@ -8,15 +10,16 @@ export default function Cart() {
   const deleteFromCart = useCartStore((state) => state.deleteFromCart);
   const total = useCartStore((state) => state.getTotal(state));
 
-
-  return (
+  if (cart.length > 0) {return (
     <div className={styles.cartContainer}>
       {cart.map((product) => (
         <div key={product.id} className={styles.productCard}>
           <div className={styles.imageNname}>
-            <img src={product.image} alt={product.name} />
-            <h3>{product.name}</h3>
-            <p>{product.price} kr.</p>
+            <img src={product.images?.[0]} alt={product.name} />
+            <div className={styles.nameNprice}>
+              <h3>{product.title}</h3>
+              <p>{product.price} kr.</p>
+            </div>
           </div>
           <div className={styles.amountNbtn}>
             <button onClick={() => addToCart(product)}>+</button>
@@ -31,7 +34,14 @@ export default function Cart() {
       ))}
 
       <p className={styles.total}>Total: {total} kr.</p>
+      <CheckoutBtn />
     </div>
   );
+ } else return(
+  <div className={styles.emptyCartMsg}>
+    <h3>Kurven er tom</h3>
+    <Link className={styles.link} to="/products">Se udstyr</Link>
+  </div>
+ )
 }
 
