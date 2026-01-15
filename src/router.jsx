@@ -18,6 +18,7 @@ import AdminRoute from "./components/adminRoute/AdminRoute";
 import AdminProducts from "./pages/admin/adminProducts/AdminProducts";
 import ProductPage from "./pages/productPage/ProductPage";
 import Checkout from "./pages/checkout/Checkout";
+import AdminOrders from "./pages/admin/adminOrders/AdminOrders";
 
 
 const router = createBrowserRouter([
@@ -75,7 +76,14 @@ const router = createBrowserRouter([
         <AdminRoute>
           <AdminProducts/>
         </AdminRoute>
-      }
+      },
+      {
+        path: "admin/orders", 
+        element: 
+        <AdminRoute>
+          <AdminOrders/>
+        </AdminRoute>
+      },
     ],
   },
 ]);

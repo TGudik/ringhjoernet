@@ -30,7 +30,7 @@ export default function CheckoutBtn() {
     }
 
     return (
-        <button onClick={handleCheckout}>
+        <button style={{alignSelf: "end", marginRight: 80}} onClick={handleCheckout}>
             Gå til betaling
         </button>
     )
