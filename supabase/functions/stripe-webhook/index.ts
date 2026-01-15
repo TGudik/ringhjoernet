@@ -42,13 +42,13 @@ serve(async (req) => {
   if (event.type === "checkout.session.completed") {
     const session = event.data.object as Stripe.Checkout.Session;
 
-    // 🔹 Hent line items fra Stripe
+    // Hent line items fra Stripe
     const lineItems = await stripe.checkout.sessions.listLineItems(
       session.id,
       { limit: 100 }
     );
 
-    // 🔹 Opret order
+    // Opret order
     const { data: order, error: orderError } = await supabase
       .from("orders")
       .insert({
@@ -65,7 +65,7 @@ serve(async (req) => {
       return new Response("Failed to create order", { status: 500 });
     }
 
-    // 🔹 Opret order_items
+    // Opret order_items
     const items = lineItems.data.map((item) => ({
       order_id: order.id,
       product_title: item.description,
