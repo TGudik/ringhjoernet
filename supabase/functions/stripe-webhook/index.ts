@@ -93,7 +93,7 @@ serve(async (req) => {
         <h1>Tak for dit køb!</h1>
         <p>Ordre #${order.id}</p>
 
-        <ul>
+        <ul style="list-style-type: none;">
           ${items.map(item => `
             <li>
               ${item.product_title} × ${item.quantity}
