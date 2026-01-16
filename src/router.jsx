@@ -10,9 +10,8 @@ import App from "./App";
 import DealTerms from "./pages/DealTerms";
 import CookieTerms from "./pages/CookieTerms";
 import Category from "./pages/products/Category";
-
-
-/* Admin imports */
+import Success from "./pages/success/Success"
+import Cancel from "./pages/cancel/Cancel";
 import SignUp from "./pages/signUp/SignUp"
 import AdminRoute from "./components/adminRoute/AdminRoute";
 import AdminProducts from "./pages/admin/adminProducts/AdminProducts";
@@ -53,6 +52,14 @@ const router = createBrowserRouter([
       {
         path: "checkout",
         element: <Checkout />,
+      },
+      {
+        path: "success",
+        element: <Success />,
+      },
+      {
+        path: "cancel",
+        element: <Cancel />,
       },
       {
         path: "handelsbetingelser",
