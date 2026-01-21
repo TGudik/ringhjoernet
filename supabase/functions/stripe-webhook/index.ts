@@ -53,7 +53,7 @@ serve(async (req) => {
       .from("orders")
       .insert({
         stripe_session_id: session.id,
-        total_amount: session.amount_total,
+    total_amount: session.amount_total,
         currency: session.currency,
         status: "paid",
       })
