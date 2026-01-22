@@ -44,6 +44,21 @@ serve(async (req) => {
 
     const supabase = createClient(supabaseUrl, serviceKey);
 
+    const { data: order, error: orderError } = await supabase
+    .from(orders)
+    .insert({
+      status: "pending",
+    })
+    .select
+    .single
+
+    if (orderError) {
+      console.error("Failed to create order:", orderError)
+      throw orderError
+    }
+
+    const orderId = order.id
+
     const { items } = await req.json();
 
     if (!items || !Array.isArray(items)) {

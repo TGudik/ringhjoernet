@@ -51,9 +51,9 @@ serve(async (req) => {
     // Opret order
     const { data: order, error: orderError } = await supabase
       .from("orders")
-      .insert({
+      .update({
         stripe_session_id: session.id,
-    total_amount: session.amount_total,
+        total_amount: session.amount_total,
         currency: session.currency,
         status: "paid",
       })
