@@ -1,7 +1,6 @@
 import useCartStore from "../../store/cartStore";
 import styles from "./cart.module.css"
 import { Link } from "react-router-dom";
-import CheckoutBtn from "../../components/checkoutBtn/CheckoutBtn";
 
 export default function Cart() {
   const cart = useCartStore((state) => state.cart);
@@ -34,7 +33,11 @@ export default function Cart() {
       ))}
 
       <p className={styles.total}>Total: {total} kr.</p>
-      <CheckoutBtn />
+      <Link 
+        className={styles.link} 
+        style={{textAlign: "center", width: 200,alignSelf: "end", marginRight: 80}}to="/checkout">
+        Til kassen
+      </Link>
     </div>
   );
  } else return(

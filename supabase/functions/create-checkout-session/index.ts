@@ -26,7 +26,7 @@ serve(async (req) => {
 
     if (!frontendUrl || !stripeKey || !supabaseUrl || !serviceKey) {
       return new Response(
-        JSON.stringify({ error: "Server configuration missing" }),
+        JSON.stringify({ error: "Server configuration mangler" }),
         {
           status: 500,
           headers: {
@@ -44,26 +44,41 @@ serve(async (req) => {
 
     const supabase = createClient(supabaseUrl, serviceKey);
 
+    const { items, customer, shipping } = await req.json();
+    
+    if (!customer || !shipping ) {
+      return new Response(
+        JSON.stringify({ error: "Mangler kunde eller leveringsoplysninger"}),
+        { status: 400 }
+      )
+    }
     const { data: order, error: orderError } = await supabase
-    .from(orders)
+    .from("orders")
     .insert({
       status: "pending",
+      customer_name: customer.name,
+      customer_email: customer.email,
+      customer_number: customer.phone,
+
+      shipping_address: shipping.address,
+      shipping_postal: shipping.postalCode,
+      shipping_city: shipping.city,
+      shipping_country: shipping.country,
+      shipping_method: shipping.method
     })
-    .select
-    .single
+    .select()
+    .single()
 
     if (orderError) {
-      console.error("Failed to create order:", orderError)
+      console.error("Kunne ikke lave ordrer:", orderError)
       throw orderError
     }
 
-    const orderId = order.id
 
-    const { items } = await req.json();
 
     if (!items || !Array.isArray(items)) {
       return new Response(
-        JSON.stringify({ error: "Invalid cart items" }),
+        JSON.stringify({ error: "Fejl i cart items" }),
         {
           status: 400,
           headers: {
@@ -84,7 +99,7 @@ serve(async (req) => {
 
     if (error || !products) {
       return new Response(
-        JSON.stringify({ error: "Failed to fetch products" }),
+        JSON.stringify({ error: "kunne ikke hente produkter" }),
         {
           status: 500,
           headers: {
@@ -100,7 +115,7 @@ serve(async (req) => {
       const product = products.find((p) => p.id === item.productId);
 
       if (!product) {
-        throw new Error("Product not found");
+        throw new Error("Produkt ikke fundet");
       }
 
       return {
@@ -120,8 +135,11 @@ serve(async (req) => {
       mode: "payment",
       payment_method_types: ["card"],
       line_items,
-      success_url: `${frontendUrl}/success`,
+      success_url: `${frontendUrl}/success?order_id=${order.id}&session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${frontendUrl}/cancel`,
+      metadata: {
+        order_id: order.id,
+      }
     });
 
     /* returner url til stripe */
@@ -136,7 +154,7 @@ serve(async (req) => {
       }
     );
   } catch (error) {
-    console.error("Checkout error:", error);
+    console.error("Checkout fejl:", error);
 
     return new Response(
       JSON.stringify({ error: error.message }),

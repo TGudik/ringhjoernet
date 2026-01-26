@@ -1,7 +1,3 @@
-export const config = {
-  verify_jwt: false,
-};
-
 import Stripe from "https://esm.sh/stripe@14.0.0";
 import { serve } from "https://deno.land/std/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
@@ -48,6 +44,8 @@ serve(async (req) => {
       { limit: 100 }
     );
 
+    const orderId = session.metadata?.order_id
+
     // Opret order
     const { data: order, error: orderError } = await supabase
       .from("orders")
@@ -57,12 +55,13 @@ serve(async (req) => {
         currency: session.currency,
         status: "paid",
       })
+      .eq("id", orderId)
       .select()
       .single();
 
     if (orderError) {
       console.error(orderError);
-      return new Response("Failed to create order", { status: 500 });
+      return new Response("Kunne ikke lave order", { status: 500 });
     }
 
     // Opret order_items
@@ -79,7 +78,7 @@ serve(async (req) => {
 
     if (itemsError) {
       console.error(itemsError);
-      return new Response("Failed to create order items", { status: 500 });
+      return new Response("Kunne ikke lave order_items", { status: 500 });
     }
 
     const customerEmail = session.customer_details?.email;
