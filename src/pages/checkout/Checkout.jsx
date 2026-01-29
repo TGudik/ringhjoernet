@@ -75,7 +75,7 @@ export default function Checkout() {
 
     return (
       <div>
-        <form onSubmit={handleSubmit}>
+        <form className={styles.form} onSubmit={handleSubmit}>
           <h2>Leveringsoplysninger</h2>
 
           <label>
@@ -166,6 +166,11 @@ export default function Checkout() {
               <option value="gls">GLS</option>
               <option value="postnord">Postnord</option>
             </select>
+          </label>
+
+          <label className={styles.checkboxContainer}>
+            <input required type="checkbox" className={styles.checkbox} />
+            <p>Accepter <a href="/handelsbetingelser" target="_blank">handelsbetingelser</a></p>
           </label>
 
           <button type="submit">Gå til betaling</button>

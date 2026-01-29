@@ -102,6 +102,7 @@ serve(async (req) => {
         </ul>
 
         <p><strong>Total:</strong> ${order.total_amount / 100} kr.</p>
+        <a href="https://ringhjoernet.dk/handelsbetingelser">Handelsbetingelser</a>
       `,
     });
 }
