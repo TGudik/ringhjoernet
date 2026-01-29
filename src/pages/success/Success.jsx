@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { supabase } from "../../lib/supabaseClient"
+import useCartStore from "../../store/cartStore"
 
 export default function Success() {
     const [items, setItems] = useState([])
@@ -27,8 +28,27 @@ export default function Success() {
 
         }
 
-        getOrderItems()
+        async function confirmOrderPaid() {
+            const clearCart = useCartStore((state) => state.clearCart)
+            const { data, error } = await supabase
+            .from("orders")
+            .select("status")
+            .eq("id", orderId)
+            .single()
 
+            if (error) {
+                console.error("kunne ikke hente ordre:", error)
+                return
+            }
+
+            if (data?.status === "paid") {
+                clearCart()
+            }
+        }
+
+        getOrderItems()
+        confirmOrderPaid()
+        
     }, []) 
 
     if (items.length === 0) return <p>Vi henter din ordrer...</p>
