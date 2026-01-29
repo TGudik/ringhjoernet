@@ -1,71 +1,81 @@
-import { useEffect, useState } from "react"
-import { supabase } from "../../lib/supabaseClient"
-import useCartStore from "../../store/cartStore"
+import { useEffect, useState } from "react";
+import { supabase } from "../../lib/supabaseClient";
+import useCartStore from "../../store/cartStore";
 
 export default function Success() {
-    const [items, setItems] = useState([])
-    const [id, setId] = useState(null)
-    
-    useEffect(() => {
-        const params = new URLSearchParams(window.location.search)
-        const orderId = params.get("order_id")
-        setId(params.get("order_id"));
+  const [items, setItems] = useState([]);
+  const [orderId, setOrderId] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-        async function getOrderItems() {
-            
-            const { data, error } = await supabase
-            .from("order_items")
-            .select("*")
-            .eq("order_id", orderId)
+  const clearCart = useCartStore((state) => state.clearCart);
 
-            if (error) {
-                console.error("Kunne ikke hente produkter: ", error)
-            }
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get("order_id");
+    setOrderId(id);
+  }, []);
 
-            console.log(data)
-            
-            setItems(data)
+  useEffect(() => {
+    if (!orderId) return;
 
-        }
+    async function getOrderItems() {
+      const { data, error } = await supabase
+        .from("order_items")
+        .select("*")
+        .eq("order_id", orderId);
 
-        async function confirmOrderPaid() {
-            const clearCart = useCartStore((state) => state.clearCart)
-            const { data, error } = await supabase
-            .from("orders")
-            .select("status")
-            .eq("id", orderId)
-            .single()
+      if (error) {
+        console.error("Kunne ikke hente produkter:", error);
+        return;
+      }
 
-            if (error) {
-                console.error("kunne ikke hente ordre:", error)
-                return
-            }
+      setItems(data ?? []);
+      setLoading(false);
+    }
 
-            if (data?.status === "paid") {
-                clearCart()
-            }
-        }
+    getOrderItems();
+  }, [orderId]);
 
-        getOrderItems()
-        confirmOrderPaid()
-        
-    }, []) 
+  useEffect(() => {
+    if (!orderId) return;
 
-    if (items.length === 0) return <p>Vi henter din ordrer...</p>
+    const interval = setInterval(async () => {
+      const { data, error } = await supabase
+        .from("orders")
+        .select("status")
+        .eq("id", orderId)
+        .single();
 
-    return (
-      <div>
-        <h2>Tak for din ordre</h2>
-        <h3>Ordrenummer: {id}</h3>
-        <ul>
-          {items.map(item => 
-            <li key={item.id}>
-              {item.product_title} × {item.quantity}
-              ({item.unit_price / 100} kr.)
-            </li>)}
-        </ul>
-      </div>
-    );
+      if (error) {
+        console.error("Kunne ikke hente ordre:", error);
+        return;
+      }
 
-  
+      if (data?.status === "paid") {
+        clearCart();
+        clearInterval(interval);
+      }
+    }, 2000);
+
+    return () => clearInterval(interval);
+  }, [orderId, clearCart]);
+
+  if (loading) {
+    return <p>Vi bekræfter din betaling…</p>;
+  }
+
+  return (
+    <div>
+      <h2>Tak for din ordre 🎉</h2>
+      <h3>Ordrenummer: {orderId}</h3>
+
+      <ul>
+        {items.map((item) => (
+          <li key={item.id}>
+            {item.product_title} × {item.quantity} ({item.unit_price / 100} kr.)
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
 }
