@@ -66,7 +66,7 @@ export default function Success() {
 
   return (
     <div>
-      <h2>Tak for din ordre 🎉</h2>
+      <h2>Tak for din ordre</h2>
       <h3>Ordrenummer: {orderId}</h3>
 
       <ul>
