@@ -1,8 +1,12 @@
 .cards {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    padding: 4vh 5vw;
-    gap: 2vw;
+    grid-template-columns: repeat(2, 1fr);
+    padding:20px 10px;
+    gap: 10px;
+
+    @media (max-width: 750px) {
+        grid-template-columns: repeat(2,1fr);
+    }
 }
 
 .cardImg {

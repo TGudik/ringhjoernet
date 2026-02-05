@@ -23,10 +23,8 @@ export default function Footer() {
         <div className={styles.footerRight}>
           <img src={logo} className={styles.footerLogo} alt="Ringhjørnet" />
           <div className={styles.payIcons}>
-            <img src={mobilepay} alt="mobilepay" />
             <FontAwesomeIcon icon={faCcMastercard} color="#fff" fontSize={50} />
             <FontAwesomeIcon icon={faCcVisa} color="#fff" fontSize={50} />
-            <FontAwesomeIcon icon={faCcApplePay} color="#fff" fontSize={50} />
           </div>
         </div>
       </div>
