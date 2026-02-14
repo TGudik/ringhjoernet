@@ -15,6 +15,7 @@ export default function Navigation() {
     const user = useAuthStore((state) => state.user)
     const totalQuantity = useCartStore((state) => state.getTotalQuantity(state))
     const [showCategories, setShowCategories] = useState(false)
+    const [showBurger, setShowBurger] = useState(false)
 
     return (
       <header>
@@ -22,51 +23,62 @@ export default function Navigation() {
           <Link to="/">
             <img src={logo} alt="Ringhjørnet" />
           </Link>
-          <nav className={styles.nav}>
-            <Link to="/needs">Alt en bokser skal bruge</Link>
-            <Link
-              to="/products"
-              onMouseEnter={() => setShowCategories(true)}
-              onMouseLeave={() => setShowCategories(false)}
-              className={styles.productsLink}
-            >
-              Udstyr
-            <div
-              className={`${styles.categoryDropdown} ${
-                showCategories ? styles.show : ""
-              }`}
-              onMouseEnter={() => setShowCategories(true)}
-              onMouseLeave={() => setShowCategories(false)}
+          <div className={styles.burgerNcart}>
+          <div
+            className={styles.burger}
+            onClick={() => setShowBurger((prev) => !prev)}
+          >
+            <div className={styles.bar}></div>
+            <div className={styles.bar}></div>
+            <div className={styles.bar}></div>
+          </div>
+            <nav className={`${styles.nav} ${showBurger ? styles.show : ""}`}>
+              <Link to="/needs">Alt en bokser skal bruge</Link>
+              <Link
+                to="/products"
+                onMouseEnter={() => setShowCategories(true)}
+                onMouseLeave={() => setShowCategories(false)}
+                className={styles.productsLink}
               >
-              <Link to="/products/bundles">Startpakker</Link>
-              <Link to="/products/gloves">Handsker</Link>
-              <Link to="/products/shoes">Boksesko</Link>
-              <Link to="/products/headgear">Boksehjelme</Link>
-              <Link to="/products/protection">Beskyttelse</Link>
-            </div>
+                Udstyr
+                <div
+                  className={`${styles.categoryDropdown} ${
+                    showCategories ? styles.show : ""
+                  }`}
+                  onMouseEnter={() => setShowCategories(true)}
+                  onMouseLeave={() => setShowCategories(false)}
+                >
+                  <Link to="/products/bundles">Startpakker</Link>
+                  <Link to="/products/gloves">Handsker</Link>
+                  <Link to="/products/shoes">Boksesko</Link>
+                  <Link to="/products/headgear">Boksehjelme</Link>
+                  <Link to="/products/protection">Beskyttelse</Link>
+                </div>
               </Link>
-            <Link to="/about">Kontakt / Om</Link>
-            <Link to="/cart" className={styles.cartNquantity}>
-              <FontAwesomeIcon icon={faBasketShopping} fontSize={30} />
-              {totalQuantity}
-            </Link>
-            {!user && 
-              <Link to="/sign-up">
-                <FontAwesomeIcon icon={faUser} fontSize={30}/>
-              </Link>
-            }
-
-            {user && 
-            <FontAwesomeIcon 
-            icon={faSignOutAlt} 
-            color="white" 
-            fontSize={28} 
-            className={styles.signOutBtn} 
-            onClick={() => supabase.auth.signOut()}>
-            </FontAwesomeIcon>
-            }
+              <Link to="/about">Kontakt / Om</Link>
+  
+              {!user && (
+                <Link to="/sign-up">
+                  <FontAwesomeIcon icon={faUser} fontSize={30} />
+                </Link>
+              )}
+  
+              {user && (
+                <FontAwesomeIcon
+                  icon={faSignOutAlt}
+                  color="white"
+                  fontSize={28}
+                  className={styles.signOutBtn}
+                  onClick={() => supabase.auth.signOut()}
+                ></FontAwesomeIcon>
+              )}
+            </nav>
             
-          </nav>
+              <Link to="/cart" className={styles.cartNquantity}>
+                <FontAwesomeIcon icon={faBasketShopping} fontSize={30} />
+                {totalQuantity}
+              </Link>
+          </div>
         </div>
       </header>
     );
