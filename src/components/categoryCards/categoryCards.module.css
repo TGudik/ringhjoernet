@@ -3,6 +3,8 @@
     grid-template-columns: repeat(2, 1fr);
     padding:20px 10px;
     gap: 10px;
+    max-width: 1140px;
+    margin: 0 auto;
 
     @media (max-width: 750px) {
         grid-template-columns: repeat(2,1fr);
@@ -12,7 +14,8 @@
 .cardImg {
     object-fit: contain;
     height: auto;
-    min-height: 400px;
+    min-height: 200px;
+    max-height: 400px;
 }
 
 .cardContainer {
